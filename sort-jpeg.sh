@@ -13,7 +13,7 @@ if [ -z $2 ]; then
 	exit 1
 fi
 
-for i in $(find "$1" -type f -iregex '.+je?pg' -print)
+for i in $(find "$1" -type f -iregex '.+je?pg' -printf "\"%h/%p\"\n")
 do
     datepath=$(identify -verbose "$i" | grep DateTimeOri | awk '{print $2 }' | sed s%:%/%g)
     if ! test -e "$2/$datepath"; then
